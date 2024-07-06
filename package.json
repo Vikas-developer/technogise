@@ -1,0 +1,27 @@
+{
+  "name": "technogise",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vikas-developer/technogise.git"
+  },
+  "author": "Vikas Gupta <vrgupta17@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vikas-developer/technogise/issues"
+  },
+  "homepage": "https://github.com/Vikas-developer/technogise#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
+  }
+}
