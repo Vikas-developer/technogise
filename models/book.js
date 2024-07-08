@@ -5,6 +5,14 @@ exports.getBooks = async () => {
   return rows;
 };
 
+exports.getBorrowedBooks = async (userId) => {
+  const [rows] = await pool.query(
+    "SELECT borrowed_books.book_id as id, books.name FROM borrowed_books join books on borrowed_books.book_id=books.id where borrowed_books.user_id = ?",
+    [userId]
+  );
+  return rows;
+};
+
 exports.borrowBook = async (userId, bookId) => {
   const [userRows] = await pool.query("SELECT * FROM users WHERE id = ?", [
     userId,
