@@ -11,12 +11,10 @@ describe("User Controller", () => {
         status: jest.fn().mockReturnThis(),
         json: jest.fn(),
       };
-
       const mockUser = { id: 1, name: "John Doe" };
       userModel.createUser.mockResolvedValue(mockUser);
 
       await createUser(req, res);
-
       expect(res.status).toHaveBeenCalledWith(201);
       expect(res.json).toHaveBeenCalledWith(mockUser);
     });
@@ -27,12 +25,10 @@ describe("User Controller", () => {
         status: jest.fn().mockReturnThis(),
         json: jest.fn(),
       };
-
       const mockError = new Error("Database error");
       userModel.createUser.mockRejectedValue(mockError);
 
       await createUser(req, res);
-
       expect(res.status).toHaveBeenCalledWith(500);
       expect(res.json).toHaveBeenCalledWith({ error: mockError.message });
     });
@@ -45,7 +41,6 @@ describe("User Controller", () => {
         status: jest.fn().mockReturnThis(),
         json: jest.fn(),
       };
-
       const mockUsers = [
         { id: 1, name: "John Doe" },
         { id: 2, name: "Jane Doe" },
@@ -53,7 +48,6 @@ describe("User Controller", () => {
       userModel.getUsers.mockResolvedValue(mockUsers);
 
       await getUsers(req, res);
-
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith(mockUsers);
     });
@@ -64,12 +58,10 @@ describe("User Controller", () => {
         status: jest.fn().mockReturnThis(),
         json: jest.fn(),
       };
-
       const mockError = new Error("Database error");
       userModel.getUsers.mockRejectedValue(mockError);
 
       await getUsers(req, res);
-
       expect(res.status).toHaveBeenCalledWith(500);
       expect(res.json).toHaveBeenCalledWith({ error: mockError.message });
     });

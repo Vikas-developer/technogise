@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 
 const port = process.env.PORT;
 
-// app.use("/api", bookRoutes);
+app.use("/api", bookRoutes);
 app.use("/api", userRoutes);
 
 app.listen(port, () => {
