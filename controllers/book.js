@@ -9,6 +9,17 @@ exports.viewBooks = async (req, res) => {
   }
 };
 
+exports.viewBorrowedBooks = async (req, res) => {
+  const { params } = req;
+  const { userId } = params;
+  try {
+    const books = await bookModel.getBorrowedBooks(userId);
+    res.status(200).json(books);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 exports.borrowBook = async (req, res) => {
   const { body } = req;
   const { userId, bookId } = body;

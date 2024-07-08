@@ -25,6 +25,34 @@ describe("Book Model", () => {
     });
   });
 
+  describe("getBorrowedBooks", () => {
+    it("should get all borrowed books for a user and return them", async () => {
+      const userId = 1;
+      const mockRows = [
+        { id: 1, name: "Book 1" },
+        { id: 2, name: "Book 2" },
+      ];
+      pool.query.mockResolvedValue([mockRows]);
+
+      const borrowedBooks = await bookModel.getBorrowedBooks(userId);
+      expect(borrowedBooks).toEqual(mockRows);
+      expect(pool.query).toHaveBeenCalledWith(
+        "SELECT borrowed_books.book_id as id, books.name FROM borrowed_books join books on borrowed_books.book_id=books.id where borrowed_books.user_id = ?",
+        [userId]
+      );
+    });
+
+    it("should handle errors", async () => {
+      const userId = 1;
+      const mockError = new Error("Database error");
+      pool.query.mockRejectedValue(mockError);
+
+      await expect(bookModel.getBorrowedBooks(userId)).rejects.toThrow(
+        "Database error"
+      );
+    });
+  });
+
   describe("borrowBook", () => {
     it("should allow a user to borrow a book if all conditions are met", async () => {
       const userId = 1;
